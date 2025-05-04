@@ -2,14 +2,23 @@
 header:
   version: 14
 
-machine: qemuriscv64
-distro: openembedded
+# 目标架构和发行版
+machine: aarch64
+distro: openeuler
 
+# 定义层仓库
 repos:
   layers:
-    # 自定义层（存放实验代码）
+    # 自定义层（实验代码）
     - name: meta-2024E8021682118
       path: meta-2024E8021682118
+
+    # openEuler 官方层
+    - name: meta-openeuler
+      url: https://gitee.com/openeuler/meta-openeuler
+      refspec: master
+      layers:
+        - meta-openeuler
 
     # 基础层
     - name: openembedded-core
@@ -26,14 +35,11 @@ repos:
         - meta-oe
         - meta-python
 
-    # RISC-V 支持层
-    - name: meta-riscv
-      url: https://git.yoctoproject.org/meta-riscv
-      refspec: master
-
+# 本地配置
 local_conf_header: |
   # 设置代理（按需）
   # export http_proxy="http://your-proxy:port"
   
-  # 设置 QEMU 内存
+  # 设置 QEMU 参数
   QB_MEM = "-m 4096"
+  QB_KERNEL_CMDLINE_APPEND = "console=ttyS0"
