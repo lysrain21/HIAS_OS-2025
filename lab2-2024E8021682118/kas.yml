@@ -2,44 +2,30 @@
 header:
   version: 14
 
-# 目标架构和发行版
 machine: aarch64
 distro: openeuler
 
-# 定义层仓库
 repos:
   layers:
     # 自定义层（实验代码）
     - name: meta-2024E8021682118
       path: meta-2024E8021682118
 
-    # openEuler 官方层
+    # openEuler 层（本地路径）
     - name: meta-openeuler
-      url: https://gitee.com/openeuler/meta-openeuler
-      refspec: master
+      path: meta-openeuler
       layers:
         - meta-openeuler
 
-    # 基础层
+    # OpenEmbedded 核心层（本地路径）
     - name: openembedded-core
-      url: https://git.openembedded.org/openembedded-core
-      refspec: master
+      path: openembedded-core
       layers:
         - meta
 
-    # 扩展功能层
+    # OpenEmbedded 扩展层（本地路径）
     - name: meta-openembedded
-      url: https://git.openembedded.org/meta-openembedded
-      refspec: master
+      path: meta-openembedded
       layers:
         - meta-oe
         - meta-python
-
-# 本地配置
-local_conf_header: |
-  # 设置代理（按需）
-  # export http_proxy="http://your-proxy:port"
-  
-  # 设置 QEMU 参数
-  QB_MEM = "-m 4096"
-  QB_KERNEL_CMDLINE_APPEND = "console=ttyS0"
