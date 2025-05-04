@@ -6,26 +6,21 @@ machine: aarch64
 distro: openeuler
 
 repos:
-  layers:
-    # 自定义层（实验代码）
-    - name: meta-2024E8021682118
-      path: meta-2024E8021682118
+  meta-2024E8021682118:
+    path: meta-2024E8021682118
 
-    # openEuler 层（本地路径）
-    - name: meta-openeuler
-      path: meta-openeuler
-      layers:
-        - meta-openeuler
+  meta-openeuler:
+    path: meta-openeuler
+    layers:
+      meta-openeuler:
 
-    # OpenEmbedded 核心层（本地路径）
-    - name: openembedded-core
-      path: openembedded-core
-      layers:
-        - meta
+  openembedded-core:
+    path: openembedded-core
+    layers:
+      meta:
 
-    # OpenEmbedded 扩展层（本地路径）
-    - name: meta-openembedded
-      path: meta-openembedded
-      layers:
-        - meta-oe
-        - meta-python
+  meta-openembedded:
+    path: meta-openembedded
+    layers:
+      meta-oe:
+      meta-python:
